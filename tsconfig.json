@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "useDefineForClassFields": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["resources/js/*"]
+    },
+    "types": [
+      "vite/client",
+      "unplugin-icons/types/vue3",
+      "unplugin-vue-define-options/macros-global"
+    ]
+  },
+  "include": [
+    "vite.config.ts",
+    "resources/js/types/auto-imports.d.ts",
+    "resources/js/types/components.d.ts",
+    "resources/js/**/*",
+    "resources/js/**/*.vue"
+  ]
+}
