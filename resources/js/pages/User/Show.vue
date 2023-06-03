@@ -31,11 +31,11 @@
         </div>
 
         <ATable
-          :columns="columns"
-          :data-source="collection"
-          :pagination="pagination"
-          :loading="loading"
-          @change="handleTableChange"
+          :columns="historiesColumns"
+          :data-source="histories"
+          :pagination="historiesPagination"
+          :loading="historiesLoading"
+          @change="handleHistoriesTableChange"
         >
           <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'blocked'">
@@ -67,25 +67,19 @@ const props = defineProps<{
   }>
 }>()
 
-const {
-  collection,
-  pagination,
-  loading,
-  handleTableChange,
-} = usePagination('histories', props.histories)
-
 const breadcrumbs = [
-  {
-    path: 'users',
-    breadcrumbName: '客戶端',
-  },
-  {
-    path: '1',
-    breadcrumbName: '紅色電腦',
-  },
+  { path: 'users', breadcrumbName: '客戶端' },
+  { path: props.user.id.toString(), breadcrumbName: props.user.name  },
 ]
 
-const columns = [
+const {
+  collection: histories,
+  pagination: historiesPagination,
+  loading: historiesLoading,
+  handleTableChange: handleHistoriesTableChange,
+} = usePagination('histories', props.histories)
+
+const historiesColumns = [
   { title: '狀態', dataIndex: 'blocked', key: 'blocked' },
   { title: '網域', dataIndex: 'hostname', key: 'hostname' },
   { title: '網址', dataIndex: 'url', key: 'url' },
