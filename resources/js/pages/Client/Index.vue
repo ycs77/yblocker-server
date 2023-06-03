@@ -9,7 +9,7 @@
     <ALayoutContent class="mt-6">
       <AList
         :grid="{ gutter: 16, column: 4 }"
-        :data-source="[{ action: 'create' }, ...clients.data]"
+        :data-source="[{ action: 'create' }, ...clients]"
         class="mt-6"
       >
         <template #renderItem="{ item }">
@@ -19,7 +19,7 @@
             </AButton>
             <ACard v-else>
               <div>
-                <Link href="/clients/1">{{ item.title }}</Link>
+                <Link :href="`/clients/${item.id}`">{{ item.title }}</Link>
               </div>
               <div class="mt-6">
                 <ATag v-if="item.connected" color="green">連線中</ATag>
@@ -34,18 +34,11 @@
 </template>
 
 <script setup lang="ts">
-const clients = {
-  data: [
-    {
-      id: 1,
-      title: '紅色電腦',
-      connected: true,
-    },
-    {
-      id: 2,
-      title: '藍色電腦',
-      connected: false,
-    },
-  ],
-}
+defineProps<{
+  clients: {
+    id: number
+    title: string
+    connected: boolean
+  }[]
+}>()
 </script>

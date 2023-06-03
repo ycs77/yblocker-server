@@ -10,12 +10,16 @@ class Client extends Model
     use HasFactory;
 
     protected $fillable = [
-        'url',
-        'hostname',
-        'blocked',
+        'title',
+        'connected',
     ];
 
     protected $casts = [
-        'blocked' => 'boolean',
+        'connected' => 'boolean',
     ];
+
+    public function histories()
+    {
+        return $this->hasMany(History::class);
+    }
 }

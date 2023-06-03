@@ -6,7 +6,8 @@
       class="!-mx-6 !-mt-6"
     >
       <template #tags>
-        <ATag color="green">連線中</ATag>
+        <ATag v-if="client.connected" color="green">連線中</ATag>
+        <ATag v-else color="red">未連線</ATag>
       </template>
 
       <template #breadcrumb>
@@ -29,7 +30,13 @@
           <div class="text-lg">瀏覽紀錄</div>
         </div>
 
-        <ATable :columns="columns" :data-source="histories.data">
+        <ATable
+          :columns="columns"
+          :data-source="collection"
+          :pagination="pagination"
+          :loading="loading"
+          @change="handleTableChange"
+        >
           <template #bodyCell="{ column, record }">
             <template v-if="column.key === 'blocked'">
               <ATag v-if="record.blocked" color="red">封鎖</ATag>
@@ -43,6 +50,30 @@
 </template>
 
 <script setup lang="ts">
+import type { Paginator } from '@/types/pagination'
+
+const props = defineProps<{
+  client: {
+    id: number
+    title: string
+    connected: boolean
+  }
+  histories: Paginator<{
+    id: number
+    url: string
+    hostname: string
+    blocked: boolean
+    created_at: string
+  }>
+}>()
+
+const {
+  collection,
+  pagination,
+  loading,
+  handleTableChange,
+} = usePagination('histories', props.histories)
+
 const breadcrumbs = [
   {
     path: 'clients',
@@ -60,30 +91,4 @@ const columns = [
   { title: '網址', dataIndex: 'url', key: 'url' },
   { title: '瀏覽時間', dataIndex: 'created_at', key: 'created_at' },
 ]
-
-const histories = {
-  data: [
-    {
-      id: 1,
-      url: 'https://laravel.com/',
-      hostname: 'laravel.com',
-      blocked: false,
-      created_at: '2023/05/26 18:39',
-    },
-    {
-      id: 2,
-      url: 'https://www.youtube.com/',
-      hostname: 'www.youtube.com',
-      blocked: true,
-      created_at: '2023/05/26 18:39',
-    },
-    {
-      id: 3,
-      url: 'https://translate.google.com.tw/',
-      hostname: 'translate.google.com.tw',
-      blocked: false,
-      created_at: '2023/05/26 18:39',
-    },
-  ],
-}
 </script>

@@ -54,6 +54,7 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useForm: typeof import('@inertiajs/vue3')['useForm']
   const usePage: typeof import('@inertiajs/vue3')['usePage']
+  const usePagination: typeof import('../composables/usePagination')['usePagination']
   const useSlots: typeof import('vue')['useSlots']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
@@ -119,6 +120,7 @@ declare module 'vue' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useForm: UnwrapRef<typeof import('@inertiajs/vue3')['useForm']>
     readonly usePage: UnwrapRef<typeof import('@inertiajs/vue3')['usePage']>
+    readonly usePagination: UnwrapRef<typeof import('../composables/usePagination')['usePagination']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
@@ -178,6 +180,7 @@ declare module '@vue/runtime-core' {
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useForm: UnwrapRef<typeof import('@inertiajs/vue3')['useForm']>
     readonly usePage: UnwrapRef<typeof import('@inertiajs/vue3')['usePage']>
+    readonly usePagination: UnwrapRef<typeof import('../composables/usePagination')['usePagination']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
