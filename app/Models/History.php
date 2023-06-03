@@ -13,16 +13,16 @@ class History extends Model
         'url',
         'hostname',
         'blocked',
-        'client_id',
+        'user_id',
     ];
 
     protected $casts = [
         'blocked' => 'boolean',
-        'client_id' => 'integer',
+        'user_id' => 'integer',
     ];
 
-    public function client()
+    public function user()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(User::class);
     }
 }

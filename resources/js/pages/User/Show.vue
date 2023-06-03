@@ -1,12 +1,12 @@
 <template>
   <div>
     <APageHeader
-      title="紅色電腦"
+      :title="user.name"
       :ghost="false"
       class="!-mx-6 !-mt-6"
     >
       <template #tags>
-        <ATag v-if="client.connected" color="green">連線中</ATag>
+        <ATag v-if="user.connected" color="green">連線中</ATag>
         <ATag v-else color="red">未連線</ATag>
       </template>
 
@@ -53,9 +53,9 @@
 import type { Paginator } from '@/types/pagination'
 
 const props = defineProps<{
-  client: {
+  user: {
     id: number
-    title: string
+    name: string
     connected: boolean
   }
   histories: Paginator<{
@@ -76,7 +76,7 @@ const {
 
 const breadcrumbs = [
   {
-    path: 'clients',
+    path: 'users',
     breadcrumbName: '客戶端',
   },
   {

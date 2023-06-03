@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Client;
 use App\Models\History;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ClientController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
-        $clients = Client::all()->map(fn (Client $client) => [
-            'id' => $client->id,
-            'title' => $client->title,
-            'connected' => $client->connected,
+        $users = User::all()->map(fn (User $user) => [
+            'id' => $user->id,
+            'name' => $user->name,
+            'connected' => $user->connected,
         ]);
 
-        return Inertia::render('Client/Index', [
-            'clients' => $clients,
+        return Inertia::render('User/Index', [
+            'users' => $users,
         ]);
     }
 
@@ -32,18 +32,18 @@ class ClientController extends Controller
         //
     }
 
-    public function show(Client $client)
+    public function show(User $user)
     {
         /** @var \Illuminate\Pagination\LengthAwarePaginator */
-        $histories = $client->histories()
+        $histories = $user->histories()
             ->latest('id')
             ->paginate(20);
 
-        return Inertia::render('Client/Show', [
-            'client' => [
-                'id' => $client->id,
-                'title' => $client->title,
-                'connected' => $client->connected,
+        return Inertia::render('User/Show', [
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'connected' => $user->connected,
             ],
             'histories' => $histories->through(fn (History $history) => [
                 'id' => $history->id,

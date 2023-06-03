@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('url');
             $table->string('hostname');
             $table->boolean('blocked');
-            $table->foreignId('client_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

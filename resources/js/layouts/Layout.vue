@@ -35,13 +35,13 @@ interface SidebarItem {
   active?: () => boolean
 }
 
-const selectedKeys = ref(['/clients'])
+const selectedKeys = ref(['/users'])
 
 const sidebar = [
   {
     icon: HeroiconsComputerDesktop,
     label: '客戶端',
-    href: '/clients',
+    href: '/users',
   },
 ] satisfies SidebarItem[] as SidebarItem[]
 

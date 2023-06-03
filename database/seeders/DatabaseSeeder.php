@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Client;
 use App\Models\History;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,14 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Client::create([
+        User::create([
             'id' => 1,
-            'title' => '紅色電腦',
+            'name' => '舊電腦',
             'connected' => true,
         ]);
-        Client::create([
+        User::create([
             'id' => 2,
-            'title' => '藍色電腦',
+            'name' => 'HP 銀色電腦',
             'connected' => false,
         ]);
 
@@ -31,21 +31,21 @@ class DatabaseSeeder extends Seeder
             'url' => 'https://laravel.com/',
             'hostname' => 'laravel.com',
             'blocked' => false,
-            'client_id' => 1,
+            'user_id' => 1,
         ]);
         History::create([
             'id' => 2,
             'url' => 'https://www.youtube.com/',
             'hostname' => 'www.youtube.com',
             'blocked' => true,
-            'client_id' => 1,
+            'user_id' => 1,
         ]);
         History::create([
             'id' => 3,
             'url' => 'https://translate.google.com.tw/',
             'hostname' => 'translate.google.com.tw',
             'blocked' => false,
-            'client_id' => 1,
+            'user_id' => 1,
         ]);
     }
 }
