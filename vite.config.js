@@ -4,9 +4,11 @@ import Laravel from 'laravel-vite-plugin'
 import Vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
+import Unocss from 'unocss/vite'
 
 export default defineConfig(({ mode }) => ({
   plugins: [
@@ -36,20 +38,19 @@ export default defineConfig(({ mode }) => ({
       vueTemplate: true,
     }),
     Components({
+      resolvers: [
+        AntDesignVueResolver(),
+        IconsResolver({ prefix: '' }),
+      ],
       dirs: [
         'resources/js/components',
         'resources/js/layouts',
       ],
       dts: './resources/js/types/components.d.ts',
-      resolvers: [
-        IconsResolver({ prefix: '' }),
-      ],
-      types: [
-        { from: '@inertiajs/vue3', names: ['Link'] },
-      ],
     }),
     DefineOptions(),
     Icons(),
+    Unocss(),
   ],
   resolve: {
     alias: {
