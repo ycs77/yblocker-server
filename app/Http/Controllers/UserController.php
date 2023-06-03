@@ -39,6 +39,10 @@ class UserController extends Controller
             ->latest('id')
             ->paginate(20);
 
+        $tokens = $user->tokens()
+            ->latest('id')
+            ->get();
+
         return Inertia::render('User/Show', [
             'user' => [
                 'id' => $user->id,
@@ -52,6 +56,11 @@ class UserController extends Controller
                 'blocked' => $history->blocked,
                 'created_at' => $history->created_at->format('Y/m/d H:i'),
             ]),
+            'tokens' => $tokens->map(fn ($token) => [
+                'id' => $token->id,
+                'name' => $token->name,
+            ]),
+            'created_token' => session('token'),
         ]);
     }
 

@@ -32,6 +32,7 @@ export default defineConfig(({ mode }) => ({
         'vue',
         {
           '@inertiajs/vue3': ['router', 'useForm', 'usePage'],
+          '@vueuse/core': ['useClipboard'],
         },
       ],
       dts: './resources/js/types/auto-imports.d.ts',

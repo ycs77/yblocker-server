@@ -9,6 +9,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AAlert: typeof import('ant-design-vue/es')['Alert']
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACard: typeof import('ant-design-vue/es')['Card']
@@ -26,6 +27,8 @@ declare module '@vue/runtime-core' {
     AStatistic: typeof import('ant-design-vue/es')['Statistic']
     ATable: typeof import('ant-design-vue/es')['Table']
     ATag: typeof import('ant-design-vue/es')['Tag']
+    HeroiconsCheckCircle: typeof import('~icons/heroicons/check-circle')['default']
+    HeroiconsDocumentDuplicate: typeof import('~icons/heroicons/document-duplicate')['default']
     HeroiconsPlus: typeof import('~icons/heroicons/plus')['default']
     Layout: typeof import('./../layouts/Layout.vue')['default']
     Link: typeof import('@inertiajs/vue3')['Link']
