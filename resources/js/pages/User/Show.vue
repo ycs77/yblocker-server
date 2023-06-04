@@ -8,6 +8,7 @@
       <template #tags>
         <ATag v-if="user.connected" color="green">連線中</ATag>
         <ATag v-else color="red">未連線</ATag>
+        <span v-if="!user.connected" class="mt-1 text-gray-500 text-xs">上次連線：{{ user.connected_at }}</span>
       </template>
 
       <template #breadcrumb>
@@ -92,6 +93,7 @@ const props = defineProps<{
   user: {
     id: number
     name: string
+    connected_at: string
     connected: boolean
   }
   histories: Paginator<{

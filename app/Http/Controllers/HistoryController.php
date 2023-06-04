@@ -9,7 +9,7 @@ class HistoryController extends Controller
 {
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validatedData = $request->validate([
             'histories' => ['array'],
             'histories.*.url' => ['required', 'string', 'max:255'],
             'histories.*.hostname' => ['required', 'string', 'max:255'],
@@ -22,7 +22,7 @@ class HistoryController extends Controller
 
         $columns = ['url', 'hostname', 'blocked', 'created_at', 'updated_at', 'user_id'];
 
-        $data = collect($data['histories'])
+        $data = collect($validatedData['histories'])
             ->map(fn (array $history) => [
                 $history['url'],
                 $history['hostname'],
@@ -33,7 +33,13 @@ class HistoryController extends Controller
             ])
             ->toArray();
 
-        History::batchInsert($columns, $data);
+        if (count($data)) {
+            History::batchInsert($columns, $data);
+        }
+
+        $user->update([
+            'connected_at' => now()->addMinutes(12),
+        ]);
 
         return response()->json(['message' => 'History stored'], 201);
     }

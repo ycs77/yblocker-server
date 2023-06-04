@@ -17,6 +17,7 @@ class UserController extends Controller
             'users' => $users->map(fn (User $user) => [
                 'id' => $user->id,
                 'name' => $user->name,
+                'connected_at' => $user->connected_at->format('Y/m/d H:i'),
                 'connected' => $user->connected,
             ]),
         ]);
@@ -47,6 +48,7 @@ class UserController extends Controller
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
+                'connected_at' => $user->connected_at->format('Y/m/d H:i'),
                 'connected' => $user->connected,
             ],
             'histories' => $histories->through(fn (History $history) => [

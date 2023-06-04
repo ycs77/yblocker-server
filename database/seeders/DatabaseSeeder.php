@@ -17,11 +17,9 @@ class DatabaseSeeder extends Seeder
     {
         $user_1 = User::create([
             'name' => '舊電腦',
-            'connected' => true,
         ]);
         User::create([
             'name' => 'HP 銀色電腦',
-            'connected' => false,
         ]);
 
         History::create([

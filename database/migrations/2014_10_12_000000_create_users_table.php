@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('connected')->default(false);
+            $table->timestamp('connected_at')->default('2000-01-01 00:00:00');
             $table->timestamps();
         });
     }

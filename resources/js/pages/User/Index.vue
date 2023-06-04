@@ -12,18 +12,19 @@
         :data-source="[{ action: 'create' }, ...users]"
         class="mt-6"
       >
-        <template #renderItem="{ item }">
+        <template #renderItem="{ item: user }">
           <AListItem>
-            <AButton v-if="item.action === 'create'" type="dashed" class="!block w-full !h-[117px]">
+            <AButton v-if="user.action === 'create'" type="dashed" class="!block w-full !h-[117px]">
               <HeroiconsPlus class="w-5 h-5" /> 新增客戶端
             </AButton>
             <ACard v-else>
               <div>
-                <Link :href="`/users/${item.id}`">{{ item.name }}</Link>
+                <Link :href="`/users/${user.id}`">{{ user.name }}</Link>
               </div>
               <div class="mt-6">
-                <ATag v-if="item.connected" color="green">連線中</ATag>
+                <ATag v-if="user.connected" color="green">連線中</ATag>
                 <ATag v-else color="red">未連線</ATag>
+                <span v-if="!user.connected" class="mt-1 text-gray-500 text-xs">上次連線：{{ user.connected_at }}</span>
               </div>
             </ACard>
           </AListItem>
@@ -38,6 +39,7 @@ defineProps<{
   users: {
     id: number
     name: string
+    connected_at: string
     connected: boolean
   }[]
 }>()
