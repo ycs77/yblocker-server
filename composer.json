@@ -11,6 +11,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "mavinoo/laravel-batch": "^2.3",
         "ycs77/inertia-laravel-components": "^0.2.1"
     },
     "require-dev": {
