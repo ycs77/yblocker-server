@@ -15,37 +15,32 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'id' => 1,
+        $user_1 = User::create([
             'name' => '舊電腦',
             'connected' => true,
         ]);
         User::create([
-            'id' => 2,
             'name' => 'HP 銀色電腦',
             'connected' => false,
         ]);
 
         History::create([
-            'id' => 1,
             'url' => 'https://laravel.com/',
             'hostname' => 'laravel.com',
             'blocked' => false,
-            'user_id' => 1,
+            'user_id' => $user_1->id,
         ]);
         History::create([
-            'id' => 2,
             'url' => 'https://www.youtube.com/',
             'hostname' => 'www.youtube.com',
             'blocked' => true,
-            'user_id' => 1,
+            'user_id' => $user_1->id,
         ]);
         History::create([
-            'id' => 3,
             'url' => 'https://translate.google.com.tw/',
             'hostname' => 'translate.google.com.tw',
             'blocked' => false,
-            'user_id' => 1,
+            'user_id' => $user_1->id,
         ]);
     }
 }

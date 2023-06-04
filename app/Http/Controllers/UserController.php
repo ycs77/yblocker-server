@@ -11,14 +11,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all()->map(fn (User $user) => [
-            'id' => $user->id,
-            'name' => $user->name,
-            'connected' => $user->connected,
-        ]);
+        $users = User::all();
 
         return Inertia::render('User/Index', [
-            'users' => $users,
+            'users' => $users->map(fn (User $user) => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'connected' => $user->connected,
+            ]),
         ]);
     }
 
