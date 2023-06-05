@@ -54,10 +54,13 @@
               <div>
                 {{ created_token }}
                 <div class="absolute top-6.5 right-4">
-                  <AButton type="link" class="!p-0" @click="copy(created_token)">
+                  <button
+                    class="!p-1 bg-transparent text-[#52c41a] border-0 border-transparent cursor-pointer"
+                    @click="copy(created_token)"
+                  >
                     <HeroiconsCheckCircle v-if="copied" class="w-5 h-5" />
                     <HeroiconsDocumentDuplicate v-else class="w-5 h-5" />
-                  </AButton>
+                  </button>
                 </div>
               </div>
             </template>
