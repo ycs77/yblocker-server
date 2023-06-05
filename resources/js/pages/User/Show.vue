@@ -26,7 +26,11 @@
     </APageHeader>
 
     <ALayoutContent class="mt-6">
-      <ACard title="瀏覽紀錄">
+      <ACard title="本週瀏覽網站圖表">
+        <ChartBrowseDomains :labels="browseDomainsChart.labels" :data="browseDomainsChart.data" class="h-[300px]" />
+      </ACard>
+
+      <ACard title="瀏覽紀錄" class="!mt-6">
         <ATable
           :columns="historiesColumns"
           :data-source="histories"
@@ -102,6 +106,10 @@ const props = defineProps<{
     name: string
     connected_at: string
     connected: boolean
+  }
+  browseDomainsChart: {
+    labels: string[]
+    data: number[]
   }
   histories: Paginator<{
     id: number

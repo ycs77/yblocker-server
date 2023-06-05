@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\BrowseDomainsChart;
 use App\Models\History;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,6 +36,11 @@ class UserController extends Controller
 
     public function show(User $user)
     {
+        $historiesForChart = $user->histories()
+            ->whereBetween('created_at', [now()->subDays(7), now()])
+            ->get();
+        $browseDomainsChart = BrowseDomainsChart::make($historiesForChart, 10);
+
         /** @var \Illuminate\Pagination\LengthAwarePaginator */
         $histories = $user->histories()
             ->latest('id')
@@ -51,6 +57,7 @@ class UserController extends Controller
                 'connected_at' => $user->connected_at->format('Y/m/d H:i'),
                 'connected' => $user->connected,
             ],
+            'browseDomainsChart' => $browseDomainsChart,
             'histories' => $histories->through(fn (History $history) => [
                 'id' => $history->id,
                 'url' => $history->url,

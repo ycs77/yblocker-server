@@ -28,6 +28,7 @@ declare module '@vue/runtime-core' {
     AStatistic: typeof import('ant-design-vue/es')['Statistic']
     ATable: typeof import('ant-design-vue/es')['Table']
     ATag: typeof import('ant-design-vue/es')['Tag']
+    ChartBrowseDomains: typeof import('./../components/ChartBrowseDomains.vue')['default']
     HeroiconsCheckCircle: typeof import('~icons/heroicons/check-circle')['default']
     HeroiconsDocumentDuplicate: typeof import('~icons/heroicons/document-duplicate')['default']
     HeroiconsPlus: typeof import('~icons/heroicons/plus')['default']
