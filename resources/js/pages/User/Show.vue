@@ -33,7 +33,18 @@
           :pagination="historiesPagination"
           :loading="historiesLoading"
           @change="handleHistoriesTableChange"
-        />
+        >
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'url'">
+              <APopover title="完整網址">
+                <template #content>
+                  <div class="w-[320px] break-all">{{ record.url }}</div>
+                </template>
+                <span class="inline-block text-truncate max-w-[280px]">{{ record.url }}</span>
+              </APopover>
+            </template>
+          </template>
+        </ATable>
       </ACard>
 
       <ACard title="令牌" class="!mt-6">
