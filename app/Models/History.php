@@ -14,14 +14,12 @@ class History extends Model
     protected $fillable = [
         'url',
         'hostname',
-        'blocked',
         'user_id',
         'created_at',
         'updated_at',
     ];
 
     protected $casts = [
-        'blocked' => 'boolean',
         'user_id' => 'integer',
     ];
 

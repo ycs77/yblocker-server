@@ -25,19 +25,16 @@ class DatabaseSeeder extends Seeder
         History::create([
             'url' => 'https://laravel.com/',
             'hostname' => 'laravel.com',
-            'blocked' => false,
             'user_id' => $user_1->id,
         ]);
         History::create([
             'url' => 'https://www.youtube.com/',
             'hostname' => 'www.youtube.com',
-            'blocked' => true,
             'user_id' => $user_1->id,
         ]);
         History::create([
             'url' => 'https://translate.google.com.tw/',
             'hostname' => 'translate.google.com.tw',
-            'blocked' => false,
             'user_id' => $user_1->id,
         ]);
     }

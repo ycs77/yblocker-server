@@ -55,7 +55,6 @@ class UserController extends Controller
                 'id' => $history->id,
                 'url' => $history->url,
                 'hostname' => $history->hostname,
-                'blocked' => $history->blocked,
                 'created_at' => $history->created_at->format('Y/m/d H:i'),
             ]),
             'tokens' => $tokens->map(fn ($token) => [

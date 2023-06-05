@@ -33,14 +33,7 @@
           :pagination="historiesPagination"
           :loading="historiesLoading"
           @change="handleHistoriesTableChange"
-        >
-          <template #bodyCell="{ column, record: history }">
-            <template v-if="column.key === 'blocked'">
-              <ATag v-if="history.blocked" color="red">封鎖</ATag>
-              <ATag v-else color="green">通過</ATag>
-            </template>
-          </template>
-        </ATable>
+        />
       </ACard>
 
       <ACard title="令牌" class="!mt-6">
@@ -100,7 +93,6 @@ const props = defineProps<{
     id: number
     url: string
     hostname: string
-    blocked: boolean
     created_at: string
   }>
   tokens: {
@@ -123,7 +115,6 @@ const {
 } = usePagination('histories', props.histories)
 
 const historiesColumns = [
-  { title: '狀態', dataIndex: 'blocked', key: 'blocked' },
   { title: '網域', dataIndex: 'hostname', key: 'hostname' },
   { title: '網址', dataIndex: 'url', key: 'url' },
   { title: '瀏覽時間', dataIndex: 'created_at', key: 'created_at' },
