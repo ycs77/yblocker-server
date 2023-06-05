@@ -18,3 +18,9 @@ yarn dev
 ```bash
 php artisan db:seed
 ```
+
+清除舊紀錄的指令：
+
+```bash
+php artisan history:prune-old
+```
