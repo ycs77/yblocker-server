@@ -9,7 +9,7 @@
     <ALayoutContent class="mt-6">
       <AList
         :grid="{ gutter: 16, column: 4 }"
-        :data-source="[{ action: 'create' }, ...users]"
+        :data-source="users"
         class="mt-6"
       >
         <template #renderItem="{ item: user }">
@@ -43,4 +43,8 @@ defineProps<{
     connected: boolean
   }[]
 }>()
+
+// const users = computed(() => {
+//   return [{ action: 'create' }, ...props.users]
+// })
 </script>
