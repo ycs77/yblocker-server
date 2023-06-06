@@ -33,16 +33,15 @@ interface SidebarItem {
   icon: Component
   label: string
   href: string
-  active?: () => boolean
+  activeMatch?: RegExp
 }
-
-const selectedKeys = ref([usePage().url ?? '/users'])
 
 const sidebar = [
   {
     icon: HeroiconsComputerDesktop,
     label: '客戶端',
     href: '/users',
+    activeMatch: /^\/users.*$/,
   },
   {
     icon: HeroiconsDocumentText,
@@ -50,6 +49,14 @@ const sidebar = [
     href: '/blacklist',
   },
 ] satisfies SidebarItem[] as SidebarItem[]
+
+const matchedItem = sidebar.find(item => {
+  if (item.activeMatch)
+    return item.activeMatch.test(usePage().url)
+  return item.href === usePage().url
+})
+
+const selectedKeys = ref([matchedItem?.href ?? sidebar[0].href])
 
 function onClickMenuItem(url: string) {
   router.get(url)
