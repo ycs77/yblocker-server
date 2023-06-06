@@ -13,7 +13,10 @@ declare module '@vue/runtime-core' {
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
     AButton: typeof import('ant-design-vue/es')['Button']
     ACard: typeof import('ant-design-vue/es')['Card']
-    ACol: typeof import('ant-design-vue/es')['Col']
+    ADropdown: typeof import('ant-design-vue/es')['Dropdown']
+    AFormItem: typeof import('ant-design-vue/es')['FormItem']
+    AInput: typeof import('ant-design-vue/es')['Input']
+    AInputPassword: typeof import('ant-design-vue/es')['InputPassword']
     ALayout: typeof import('ant-design-vue/es')['Layout']
     ALayoutContent: typeof import('ant-design-vue/es')['LayoutContent']
     ALayoutHeader: typeof import('ant-design-vue/es')['LayoutHeader']
@@ -24,8 +27,6 @@ declare module '@vue/runtime-core' {
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
     APageHeader: typeof import('ant-design-vue/es')['PageHeader']
     APopover: typeof import('ant-design-vue/es')['Popover']
-    ARow: typeof import('ant-design-vue/es')['Row']
-    AStatistic: typeof import('ant-design-vue/es')['Statistic']
     ATable: typeof import('ant-design-vue/es')['Table']
     ATag: typeof import('ant-design-vue/es')['Tag']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
@@ -34,6 +35,5 @@ declare module '@vue/runtime-core' {
     HeroiconsDocumentDuplicate: typeof import('~icons/heroicons/document-duplicate')['default']
     HeroiconsPlus: typeof import('~icons/heroicons/plus')['default']
     Layout: typeof import('./../layouts/Layout.vue')['default']
-    Link: typeof import('@inertiajs/vue3')['Link']
   }
 }

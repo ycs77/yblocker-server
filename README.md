@@ -2,7 +2,7 @@
 
 ## 本地安裝
 
-依賴 Laravel Homestead 環境，PHP 8.0，Node.js 18+。
+依賴 PHP 8.1，Node.js 18+。
 
 ```bash
 cp .env.example .env
@@ -11,6 +11,12 @@ php artisan key:generate
 php artisan migrate
 yarn
 yarn dev
+```
+
+從 `.env` 檔中同步管理員帳號：
+
+```bash
+php artisan db:seed AdminSyncFromEnv
 ```
 
 產生開發用假資料：

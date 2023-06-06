@@ -1,8 +1,27 @@
 <template>
   <ALayout class="min-h-screen">
     <ALayoutHeader class="h-12">
-      <div class="h-full flex items-center text-white text-xl font-bold select-none">
-        yBlocker
+      <div class="h-full flex justify-between items-center">
+        <div class="h-full flex items-center text-white text-xl font-bold select-none">
+          yBlocker
+        </div>
+
+        <div class="h-full gap-2">
+          <ADropdown>
+            <div class="h-full px-3 flex items-center hover:bg-[#252a3d] text-white transition-colors duration-300 cursor-pointer select-none">管理員</div>
+
+            <template #overlay>
+              <AMenu>
+                <AMenuItem>
+                  <Link href="/logout" method="post" as="button" class="flex items-center bg-transparent border-0 cursor-pointer">
+                    <LogoutOutlined class="w-3 h-3 mr-2" />
+                    <span class="text-sm">登出</span>
+                  </Link>
+                </AMenuItem>
+              </AMenu>
+            </template>
+          </ADropdown>
+        </div>
       </div>
     </ALayoutHeader>
 
@@ -28,6 +47,7 @@
 <script setup lang="ts">
 import HeroiconsComputerDesktop from '~icons/heroicons/computer-desktop'
 import HeroiconsDocumentText from '~icons/heroicons/document-text'
+import { LogoutOutlined } from '@ant-design/icons-vue'
 
 interface SidebarItem {
   icon: Component
