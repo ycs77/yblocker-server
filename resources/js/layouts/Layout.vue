@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
 import HeroiconsComputerDesktop from '~icons/heroicons/computer-desktop'
+import HeroiconsDocumentText from '~icons/heroicons/document-text'
 
 interface SidebarItem {
   icon: Component
@@ -35,13 +36,18 @@ interface SidebarItem {
   active?: () => boolean
 }
 
-const selectedKeys = ref(['/users'])
+const selectedKeys = ref([usePage().url ?? '/users'])
 
 const sidebar = [
   {
     icon: HeroiconsComputerDesktop,
     label: '客戶端',
     href: '/users',
+  },
+  {
+    icon: HeroiconsDocumentText,
+    label: '黑名單',
+    href: '/blacklist',
   },
 ] satisfies SidebarItem[] as SidebarItem[]
 

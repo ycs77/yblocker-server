@@ -97,8 +97,8 @@
 </template>
 
 <script setup lang="ts">
-import type { Paginator } from '@/types/pagination'
 import { message } from 'ant-design-vue/es'
+import type { Paginator } from '@/types/pagination'
 
 const props = defineProps<{
   user: {
