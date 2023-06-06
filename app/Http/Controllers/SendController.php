@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\History;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class HistoryController extends Controller
+class SendController extends Controller
 {
-    public function store(Request $request)
+    protected int $extendConnectedMinutes = 12;
+
+    public function __invoke(Request $request)
     {
         $validatedData = $request->validate([
             'histories' => ['array'],
@@ -19,9 +23,25 @@ class HistoryController extends Controller
         /** @var \App\Models\User */
         $user = $request->user();
 
+        $this->insertHistory($user, $validatedData['histories']);
+
+        $user->update([
+            'connected_at' => now()->addMinutes($this->extendConnectedMinutes),
+        ]);
+
+        $blacklist = $this->getBlacklist();
+
+        return response()->json([
+            'message' => 'Sent successfully',
+            'blacklist' => $blacklist,
+        ]);
+    }
+
+    protected function insertHistory(User $user, array $histories): void
+    {
         $columns = ['url', 'hostname', 'created_at', 'updated_at', 'user_id'];
 
-        $data = collect($validatedData['histories'])
+        $data = collect($histories)
             ->map(fn (array $history) => [
                 $history['url'],
                 $history['hostname'],
@@ -34,11 +54,14 @@ class HistoryController extends Controller
         if (count($data)) {
             History::batchInsert($columns, $data);
         }
+    }
 
-        $user->update([
-            'connected_at' => now()->addMinutes(12),
-        ]);
+    protected function getBlacklist()
+    {
+        if (! Storage::exists('blacklist.txt')) {
+            Storage::write('blacklist.txt', '');
+        }
 
-        return response()->json(['message' => 'History stored'], 201);
+        return Storage::get('blacklist.txt');
     }
 }

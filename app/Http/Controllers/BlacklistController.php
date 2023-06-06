@@ -24,12 +24,12 @@ class BlacklistController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'blacklist' => ['required', 'string'],
+            'blacklist' => ['nullable', 'string'],
         ]);
 
         $blacklist = $request->input('blacklist');
 
-        Storage::write('blacklist.txt', $blacklist);
+        Storage::write('blacklist.txt', $blacklist ?? '');
 
         return back();
     }
