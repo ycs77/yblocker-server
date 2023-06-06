@@ -16,7 +16,7 @@ yarn dev
 產生開發用假資料：
 
 ```bash
-php artisan db:seed
+php artisan db:seed UserSeeder
 ```
 
 清除舊紀錄的指令：
