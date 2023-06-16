@@ -31,6 +31,49 @@
       </ACard>
 
       <ACard title="瀏覽紀錄" class="!mt-6">
+        <div class="mb-6 grid grid-cols-3 gap-6">
+          <div class="flex">
+            <label class="inline-flex justify-end items-center flex-[0_0_120px] max-w-[120px] mr-2">網域:</label>
+            <div class="flex-1">
+              <ASelect
+                v-model:value="historyFilterForm.hostname"
+                mode="multiple"
+                label-in-value
+                placeholder="搜尋網域..."
+                :filter-option="false"
+                :max-tag-count="1"
+                :options="hostnameSelectState.data"
+                @search="fetchHostname"
+                class="w-full"
+              >
+                <template v-if="hostnameSelectState.fetching" #notFoundContent>
+                  <div class="flex justify-center">
+                    <ASpin size="small" />
+                  </div>
+                </template>
+              </ASelect>
+            </div>
+          </div>
+          <div class="flex">
+            <label class="inline-flex justify-end items-center flex-[0_0_120px] max-w-[120px] mr-2">網址:</label>
+            <div class="flex-1">
+              <AInput v-model:value="historyFilterForm.url" class="w-full" />
+            </div>
+          </div>
+          <div class="flex">
+            <label class="inline-flex justify-end items-center flex-[0_0_120px] max-w-[120px] mr-2">瀏覽時間:</label>
+            <div class="flex-1">
+              <ARangePicker v-model:value="historyFilterForm.created_period" class="w-full" />
+            </div>
+          </div>
+          <div></div>
+          <div></div>
+          <div class="space-x-4 text-right">
+            <AButton @click="resetHistoryFilter">重設</AButton>
+            <AButton type="primary" :loading="historyFilterForm.processing" @click="submitHistoryFilter">查詢</AButton>
+          </div>
+        </div>
+
         <ATable
           :columns="historiesColumns"
           :data-source="histories"
@@ -98,6 +141,9 @@
 
 <script setup lang="ts">
 import { message } from 'ant-design-vue/es'
+import axios from 'axios'
+import dayjs, { type Dayjs } from 'dayjs'
+import { debounce, pickBy } from 'lodash-es'
 import type { Paginator } from '@/types/pagination'
 
 const props = defineProps<{
@@ -117,6 +163,11 @@ const props = defineProps<{
     hostname: string
     created_at: string
   }>
+  historyFilters: {
+    url: string[] | null
+    hostname: string[] | null
+    created_period: [string, string] | null
+  }
   tokens: {
     id: number
     name: string
@@ -128,6 +179,68 @@ const breadcrumbs = [
   { path: 'users', breadcrumbName: '客戶端' },
   { path: props.user.id.toString(), breadcrumbName: props.user.name  },
 ]
+
+const historyFilterForm = useForm({
+  url: props.historyFilters.url,
+  hostname: props.historyFilters.hostname
+    ?.map(hostname => ({ value: hostname })) as Record<string, any>[],
+  created_period: props.historyFilters.created_period
+    ?.map(date => dayjs(date)) ?? null as [Dayjs, Dayjs] | null,
+})
+
+let lastHostnameFetchId = 0
+const hostnameSelectState = reactive({
+  data: [] as {
+    label: string
+    value: string
+  }[],
+  fetching: false,
+})
+
+const fetchHostname = debounce(value => {
+  lastHostnameFetchId += 1
+  const fetchId = lastHostnameFetchId
+  hostnameSelectState.data = []
+  hostnameSelectState.fetching = true
+
+  axios.post(`/users/${props.user.id}/hostname`, { search: value })
+    .then(res => {
+      if (fetchId !== lastHostnameFetchId) return
+
+      const data = res.data.results.map((hostname: string) => ({
+        label: hostname,
+        value: hostname,
+      }))
+      hostnameSelectState.data = data
+      hostnameSelectState.fetching = false
+    })
+}, 300)
+
+watch(() => historyFilterForm.hostname, () => {
+  hostnameSelectState.data = []
+  hostnameSelectState.fetching = false
+})
+
+function submitHistoryFilter() {
+  const form = historyFilterForm.data()
+  const data = {
+    url: form.url,
+    hostname: form.hostname.map(option => option.value),
+    created_period: (form.created_period ?? []).map(date => date.format('YYYY-MM-DD')),
+  }
+
+  router.get(`/users/${props.user.id}`, pickBy(data, v => Array.isArray(v) ? v.length > 0 : v), {
+    preserveScroll: true,
+    only: ['histories', 'historyFilters']
+  })
+}
+
+function resetHistoryFilter() {
+  router.get(`/users/${props.user.id}`, {}, {
+    preserveScroll: true,
+    only: ['histories', 'historyFilters']
+  })
+}
 
 const {
   collection: histories,
