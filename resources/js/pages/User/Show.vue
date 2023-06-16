@@ -36,6 +36,7 @@
           :data-source="histories"
           :pagination="historiesPagination"
           :loading="historiesLoading"
+          size="small"
           @change="handleHistoriesTableChange"
         >
           <template #bodyCell="{ column, record }">
@@ -58,9 +59,8 @@
           </AButton>
         </template>
 
-        <div class="mb-6">
+        <div v-if="created_token" class="mb-6">
           <AAlert
-            v-if="created_token"
             message="令牌已產生完成，請立即複製令牌代碼並妥善保管"
             type="success"
             show-icon
