@@ -4,7 +4,7 @@
     style="background-image: url('/images/background.svg')"
   >
     <div class="max-w-sm px-4 py-16 mx-auto">
-      <div class="text-gray-900 text-4xl text-center font-bold">yBlock</div>
+      <div class="text-gray-700 text-4xl text-center font-bold">yBlocker</div>
 
       <form class="mt-16" :form="form" @submit.prevent="form.post('/login')">
         <AAlert
