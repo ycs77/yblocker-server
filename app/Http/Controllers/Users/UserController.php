@@ -73,12 +73,14 @@ class UserController extends Controller
                     ->latest('id')
                     ->paginate(20);
 
-                return $histories->through(fn (History $history) => [
-                    'id' => $history->id,
-                    'url' => $history->url,
-                    'hostname' => $history->hostname,
-                    'created_at' => $history->created_at->format('Y/m/d H:i'),
-                ]);
+                return $histories
+                    ->withQueryString()
+                    ->through(fn (History $history) => [
+                        'id' => $history->id,
+                        'url' => $history->url,
+                        'hostname' => $history->hostname,
+                        'created_at' => $history->created_at->format('Y/m/d H:i'),
+                    ]);
             },
             'historyFilters' => [
                 'url' => $request->input('url'),
