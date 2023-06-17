@@ -140,10 +140,11 @@
 </template>
 
 <script setup lang="ts">
-import { message } from 'ant-design-vue/es'
 import axios from 'axios'
 import dayjs, { type Dayjs } from 'dayjs'
 import { debounce, pickBy } from 'lodash-es'
+import { message } from 'ant-design-vue/es'
+import type { LabeledValue } from 'ant-design-vue/es/select'
 import type { Paginator } from '@/types/pagination'
 
 const props = defineProps<{
@@ -164,7 +165,7 @@ const props = defineProps<{
     created_at: string
   }>
   historyFilters: {
-    url: string[] | null
+    url: string | null
     hostname: string[] | null
     created_period: [string, string] | null
   }
@@ -181,11 +182,12 @@ const breadcrumbs = [
 ]
 
 const historyFilterForm = useForm({
-  url: props.historyFilters.url,
+  url: props.historyFilters.url ?? undefined,
   hostname: props.historyFilters.hostname
-    ?.map(hostname => ({ value: hostname })) as Record<string, any>[],
-  created_period: props.historyFilters.created_period
-    ?.map(date => dayjs(date)) ?? null as [Dayjs, Dayjs] | null,
+    ?.map(hostname => ({ value: hostname })) as LabeledValue[] | undefined,
+  created_period: (
+    props.historyFilters.created_period?.map(date => dayjs(date)) ?? undefined
+  ) as [Dayjs, Dayjs] | undefined,
 })
 
 let lastHostnameFetchId = 0
@@ -225,7 +227,7 @@ function submitHistoryFilter() {
   const form = historyFilterForm.data()
   const data = {
     url: form.url,
-    hostname: form.hostname.map(option => option.value),
+    hostname: form.hostname?.map(option => option.value),
     created_period: (form.created_period ?? []).map(date => date.format('YYYY-MM-DD')),
   }
 
