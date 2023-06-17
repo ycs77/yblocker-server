@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Storage;
 
 class SendController extends Controller
 {
-    protected int $extendConnectedMinutes = 12;
-
     public function __invoke(Request $request)
     {
         $validatedData = $request->validate([
@@ -28,7 +26,7 @@ class SendController extends Controller
         $this->insertHistory($user, $validatedData['histories'], $hiddenlist);
 
         $user->update([
-            'connected_at' => now()->addMinutes($this->extendConnectedMinutes),
+            'connected_at' => now(),
         ]);
 
         $blacklist = $this->getBlacklist();

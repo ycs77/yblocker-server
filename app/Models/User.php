@@ -25,7 +25,7 @@ class User extends Authenticatable
 
     public function connected(): Attribute
     {
-        return Attribute::make(fn () => $this->connected_at->gt(now()));
+        return Attribute::make(fn () => now()->lt($this->connected_at->addMinutes(12)));
     }
 
     public function histories()
