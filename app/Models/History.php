@@ -33,7 +33,7 @@ class History extends Model
     public function scopeHiddenlist(Builder $query): void
     {
         if (Storage::exists('hiddenlist.txt')) {
-            $domains = explode("\n", Storage::read('hiddenlist.txt', ''));
+            $domains = explode("\n", Storage::get('hiddenlist.txt', ''));
 
             $query->whereNotIn('hostname', $domains);
         }
