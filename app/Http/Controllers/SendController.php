@@ -23,7 +23,9 @@ class SendController extends Controller
         /** @var \App\Models\User */
         $user = $request->user();
 
-        $this->insertHistory($user, $validatedData['histories']);
+        $hiddenlist = $this->getHiddenlist();
+
+        $this->insertHistory($user, $validatedData['histories'], $hiddenlist);
 
         $user->update([
             'connected_at' => now()->addMinutes($this->extendConnectedMinutes),
@@ -37,11 +39,12 @@ class SendController extends Controller
         ]);
     }
 
-    protected function insertHistory(User $user, array $histories): void
+    protected function insertHistory(User $user, array $histories, array $hiddenlist = []): void
     {
         $columns = ['url', 'hostname', 'created_at', 'updated_at', 'user_id'];
 
         $data = collect($histories)
+            ->filter(fn (array $history) => ! in_array($history['hostname'], $hiddenlist))
             ->map(fn (array $history) => [
                 $history['url'],
                 $history['hostname'],
@@ -56,7 +59,16 @@ class SendController extends Controller
         }
     }
 
-    protected function getBlacklist()
+    protected function getHiddenlist(): array
+    {
+        if (! Storage::exists('hiddenlist.txt')) {
+            Storage::write('hiddenlist.txt', '');
+        }
+
+        return explode("\n", Storage::get('hiddenlist.txt', ''));
+    }
+
+    protected function getBlacklist(): string
     {
         if (! Storage::exists('blacklist.txt')) {
             Storage::write('blacklist.txt', '');
