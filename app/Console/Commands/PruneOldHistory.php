@@ -26,7 +26,7 @@ class PruneOldHistory extends Command
      */
     public function handle()
     {
-        $date = now()->subMonths(1);
+        $date = now()->subWeeks(2);
 
         History::query()->where('created_at', '<', $date)->delete();
 
