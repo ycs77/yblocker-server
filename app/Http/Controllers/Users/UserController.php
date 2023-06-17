@@ -47,6 +47,7 @@ class UserController extends Controller
             ],
             'browseDomainsChart' => function () use ($user) {
                 $historiesForChart = $user->histories()
+                    ->hiddenlist()
                     ->whereBetween('created_at', [now()->subDays(7), now()])
                     ->get();
 
@@ -55,6 +56,7 @@ class UserController extends Controller
             'histories' => function () use ($request, $user) {
                 /** @var \Illuminate\Pagination\LengthAwarePaginator */
                 $histories = $user->histories()
+                    ->hiddenlist()
                     ->when($request->input('url'), fn (Builder $query, string $url) =>
                         $query->where('url', 'LIKE', '%'.$url.'%')
                     )

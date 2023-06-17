@@ -15,6 +15,7 @@ class HostnameControoller extends Controller
         if ($search = $request->input('search')) {
             $results = $user
                 ->histories()
+                ->hiddenlist()
                 ->where('hostname', 'LIKE', '%'.$search.'%')
                 ->groupBy('hostname')
                 ->take(10)

@@ -68,6 +68,11 @@ const sidebar = [
     label: '黑名單',
     href: '/blacklist',
   },
+  {
+    icon: HeroiconsDocumentText,
+    label: '後台隱藏名單',
+    href: '/hiddenlist',
+  },
 ] satisfies SidebarItem[] as SidebarItem[]
 
 const matchedItem = sidebar.find(item => {

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlacklistController;
+use App\Http\Controllers\HiddenlistController;
 use App\Http\Controllers\Users\HostnameControoller;
 use App\Http\Controllers\Users\TokenControoller;
 use App\Http\Controllers\Users\UserController;
@@ -20,6 +21,9 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::get('/blacklist', [BlacklistController::class, 'index']);
     Route::post('/blacklist', [BlacklistController::class, 'store']);
+
+    Route::get('/hiddenlist', [HiddenlistController::class, 'index']);
+    Route::post('/hiddenlist', [HiddenlistController::class, 'store']);
 });
 
 Auth::routes([
