@@ -11,8 +11,7 @@ export function usePagination<T>(
     current_page: source.current_page,
     per_page: source.per_page,
     total: source.total,
-    prev_page_url: source.prev_page_url,
-    next_page_url: source.next_page_url,
+    first_page_url: source.first_page_url,
   })
 
   const pagination = computed(() => ({
@@ -24,11 +23,7 @@ export function usePagination<T>(
   const loading = ref(false)
 
   const handleTableChange = (pagination: any) => {
-    const direction = pagination.current - paginationMeta.value.current_page > 0 ? 'next' : 'prev'
-
-    const url = direction === 'next'
-      ? paginationMeta.value.next_page_url
-      : paginationMeta.value.prev_page_url
+    const url = paginationMeta.value.first_page_url.replace('page=1', `page=${pagination.current}`)
 
     loading.value = true
 
@@ -48,8 +43,7 @@ export function usePagination<T>(
         current_page: props[key].current_page,
         per_page: props[key].per_page,
         total: props[key].total,
-        prev_page_url: props[key].prev_page_url,
-        next_page_url: props[key].next_page_url,
+        first_page_url: props[key].first_page_url,
       }
     })
   }
