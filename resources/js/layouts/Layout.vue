@@ -1,6 +1,6 @@
 <template>
   <ALayout class="min-h-screen">
-    <ALayoutHeader class="h-12">
+    <ALayoutHeader class="fixed inset-x-0 z-[1] w-full h-12">
       <div class="h-full flex justify-between items-center">
         <div class="h-full flex items-center text-white text-xl font-bold select-none">
           yBlocker
@@ -25,8 +25,13 @@
       </div>
     </ALayoutHeader>
 
-    <ALayout>
-      <ALayoutSider class="relative z-[100] bg-white" style="box-shadow: 2px 0 8px 0 rgba(29,35,41,.05);">
+    <ALayout has-sider class="mt-12">
+      <ALayoutSider
+        class="fixed top-12 bottom-0 z-[1] bg-white"
+        style="box-shadow: 2px 0 8px 0 rgba(29,35,41,.05);"
+        breakpoint="lg"
+        collapsed-width="0"
+      >
         <AMenu v-model:selectedKeys="selectedKeys" mode="inline">
           <AMenuItem v-for="item in sidebar" :key="item.href" @click="onClickMenuItem(item.href)">
             <template #icon>
@@ -37,7 +42,7 @@
         </AMenu>
       </ALayoutSider>
 
-      <ALayout class="p-6">
+      <ALayout class="p-6 lg:ml-[200px]">
         <slot />
       </ALayout>
     </ALayout>
