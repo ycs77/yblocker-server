@@ -83,12 +83,16 @@
           @change="handleHistoriesTableChange"
         >
           <template #bodyCell="{ column, record }">
-            <template v-if="column.key === 'url'">
-              <APopover title="完整網址">
+            <template v-if="column.key === 'link'">
+              <APopover>
                 <template #content>
-                  <div class="w-[320px] break-all">{{ record.url }}</div>
+                  <div class="max-w-[320px]">
+                    <div class="break-all">{{ record.title || decodeURI(record.url) }}</div>
+                  </div>
                 </template>
-                <span class="inline-block text-truncate max-w-[280px]">{{ record.url }}</span>
+                <a class="inline-block text-truncate max-w-[480px]" :href="record.url" rel="noopener noreferrer" target="_blank">
+                  {{ record.title || decodeURI(record.url) }}
+                </a>
               </APopover>
             </template>
           </template>
@@ -162,6 +166,7 @@ const props = defineProps<{
     id: number
     url: string
     hostname: string
+    title: string
     created_at: string
   }>
   historyFilters: {
@@ -253,7 +258,7 @@ const {
 
 const historiesColumns = [
   { title: '網域', dataIndex: 'hostname', key: 'hostname' },
-  { title: '網址', dataIndex: 'url', key: 'url' },
+  { title: '連結', dataIndex: 'link', key: 'link' },
   { title: '瀏覽時間', dataIndex: 'created_at', key: 'created_at' },
 ]
 
