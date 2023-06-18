@@ -81,6 +81,7 @@ class UserController extends Controller
                         'id' => $history->id,
                         'url' => $history->url,
                         'hostname' => $history->hostname,
+                        'title' => $history->title,
                         'created_at' => $history->created_at->format('Y/m/d H:i'),
                     ]);
             },

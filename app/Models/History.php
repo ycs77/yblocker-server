@@ -16,6 +16,7 @@ class History extends Model
     protected $fillable = [
         'url',
         'hostname',
+        'title',
         'user_id',
         'created_at',
         'updated_at',

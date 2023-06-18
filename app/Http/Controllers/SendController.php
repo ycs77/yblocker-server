@@ -15,6 +15,7 @@ class SendController extends Controller
             'histories' => ['array'],
             'histories.*.url' => ['required', 'string', 'max:255'],
             'histories.*.hostname' => ['required', 'string', 'max:255'],
+            'histories.*.title' => ['required', 'string', 'max:255'],
             'histories.*.created_at' => ['required', 'date_format:Y-m-d H:i:s'],
         ]);
 
@@ -39,13 +40,14 @@ class SendController extends Controller
 
     protected function insertHistory(User $user, array $histories, array $hiddenlist = []): void
     {
-        $columns = ['url', 'hostname', 'created_at', 'updated_at', 'user_id'];
+        $columns = ['url', 'hostname', 'title', 'created_at', 'updated_at', 'user_id'];
 
         $data = collect($histories)
             ->filter(fn (array $history) => ! in_array($history['hostname'], $hiddenlist))
             ->map(fn (array $history) => [
                 $history['url'],
                 $history['hostname'],
+                $history['title'],
                 $history['created_at'],
                 $history['created_at'],
                 $user->id,
