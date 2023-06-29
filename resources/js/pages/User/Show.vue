@@ -31,7 +31,7 @@
       </ACard>
 
       <ACard title="瀏覽紀錄" class="!mt-6">
-        <div class="mb-6 grid grid-cols-3 gap-6">
+        <div class="mb-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div class="flex">
             <label class="inline-flex justify-end items-center flex-[0_0_120px] max-w-[120px] mr-2">網域:</label>
             <div class="flex-1">
@@ -66,9 +66,7 @@
               <ARangePicker v-model:value="historyFilterForm.created_period" class="w-full" />
             </div>
           </div>
-          <div></div>
-          <div></div>
-          <div class="space-x-4 text-right">
+          <div class="space-x-4 text-right lg:col-span-3">
             <AButton @click="resetHistoryFilter">重設</AButton>
             <AButton type="primary" :loading="historyFilterForm.processing" @click="submitHistoryFilter">查詢</AButton>
           </div>
