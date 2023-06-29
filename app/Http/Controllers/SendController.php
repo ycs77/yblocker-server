@@ -15,7 +15,7 @@ class SendController extends Controller
             'histories' => ['array'],
             'histories.*.url' => ['required', 'string', 'max:255'],
             'histories.*.hostname' => ['required', 'string', 'max:255'],
-            'histories.*.title' => ['required', 'string', 'max:255'],
+            'histories.*.title' => ['nullable', 'string', 'max:255'],
             'histories.*.created_at' => ['required', 'date_format:Y-m-d H:i:s'],
         ]);
 
@@ -47,7 +47,7 @@ class SendController extends Controller
             ->map(fn (array $history) => [
                 $history['url'],
                 $history['hostname'],
-                $history['title'],
+                $history['title'] ?? '',
                 $history['created_at'],
                 $history['created_at'],
                 $user->id,
