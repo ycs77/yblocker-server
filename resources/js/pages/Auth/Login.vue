@@ -21,6 +21,7 @@
             size="large"
             type="text"
             placeholder="帳號"
+            autofocus
           >
             <template #prefix>
               <UserOutlined :style="{ color: 'rgba(0,0,0,.25)' }" />
