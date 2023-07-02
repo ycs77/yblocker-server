@@ -10,7 +10,7 @@ import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Unocss from 'unocss/vite'
 
-export default defineConfig(({ mode }) => ({
+export default defineConfig({
   plugins: [
     Laravel({
       input: 'resources/js/app.ts',
@@ -58,4 +58,4 @@ export default defineConfig(({ mode }) => ({
       '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
     },
   },
-}))
+})

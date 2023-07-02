@@ -48,15 +48,30 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-string-parser/-/helper-string-parser-7.21.5.tgz#2b3eea65443c6bdc31c22d037c65f6d323b6b2bd"
   integrity sha512-5pTUx3hAJaZIdW99sJ6ZUUgWq/Y+Hja7TowEnLNMm1VivRgZQL3vpBY3qUACVsvw+yQU6+YgfBVmcbLaZtrA1w==
 
+"@babel/helper-string-parser@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babel/helper-string-parser/-/helper-string-parser-7.22.5.tgz#533f36457a25814cf1df6488523ad547d784a99f"
+  integrity sha512-mM4COjgZox8U+JcXQwPijIZLElkgEpO5rsERVDJTc2qfCDfERyob6k5WegS14SX18IIjv+XD+GrqNumY5JRCDw==
+
 "@babel/helper-validator-identifier@^7.19.1":
   version "7.19.1"
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.19.1.tgz#7eea834cf32901ffdc1a7ee555e2f9c27e249ca2"
   integrity sha512-awrNfaMtnHUr653GgGEs++LlAvW6w+DcPrOliSMXWCKo597CwL5Acf/wWdNkf/tfEQE3mjkeD1YOVZOUV/od1w==
 
+"@babel/helper-validator-identifier@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.22.5.tgz#9544ef6a33999343c8740fa51350f30eeaaaf193"
+  integrity sha512-aJXu+6lErq8ltp+JhkJUfk1MTGyuA4v7f3pA+BJ5HLfNC6nAQ0Cpi9uOquUj8Hehg0aUiHzWQbOVJGao6ztBAQ==
+
 "@babel/parser@^7.16.4", "@babel/parser@^7.20.15", "@babel/parser@^7.21.3":
   version "7.22.4"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.22.4.tgz#a770e98fd785c231af9d93f6459d36770993fb32"
   integrity sha512-VLLsx06XkEYqBtE5YGPwfSGwfrjnyPP5oiGty3S8pQLFDFLaS8VwWSIxkTXpcvr5zeYLE6+MBNl2npl/YnfofA==
+
+"@babel/parser@^7.22.4":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.22.5.tgz#721fd042f3ce1896238cf1b341c77eb7dee7dbea"
+  integrity sha512-DFZMC9LJUG9PLOclRC32G63UXwzqS2koQC8dkx+PLdmt1xSePYpbT/NbsrJy8Q/muXz7o/h/d4A7Fuyixm559Q==
 
 "@babel/runtime@^7.10.5":
   version "7.22.3"
@@ -65,13 +80,22 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@babel/types@^7.21.3", "@babel/types@^7.21.5":
+"@babel/types@^7.21.3":
   version "7.22.4"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.22.4.tgz#56a2653ae7e7591365dabf20b76295410684c071"
   integrity sha512-Tx9x3UBHTTsMSW85WB2kphxYQVvrZ/t1FxD88IpSgIjiUJlCm9z+xWIDwyo1vffTwSqteqyznB8ZE9vYYk16zA==
   dependencies:
     "@babel/helper-string-parser" "^7.21.5"
     "@babel/helper-validator-identifier" "^7.19.1"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.22.4":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.22.5.tgz#cd93eeaab025880a3a47ec881f4b096a5b786fbe"
+  integrity sha512-zo3MIHGOkPOfoRXitsgHLjEXmlDaD/5KU1Uzuc9GNiZPhSqVxVRtxuPaSBZDsYZ9qV88AjtMtWW7ww98loJ9KA==
+  dependencies:
+    "@babel/helper-string-parser" "^7.22.5"
+    "@babel/helper-validator-identifier" "^7.22.5"
     to-fast-properties "^2.0.0"
 
 "@ctrl/tinycolor@^3.4.0":
@@ -587,14 +611,15 @@
     "@volar/typescript" "1.4.1-patch.2"
     "@volar/vue-language-core" "1.6.5"
 
-"@vue-macros/common@~1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@vue-macros/common/-/common-1.3.3.tgz#2eeb7e4e093437fb8a0bb3d5ab783ed1d72e5c4d"
-  integrity sha512-bjHomaf3mu+ARMD4DX22C/lLVVocbmwgcLH7bg1rK4kB5ghesgShZTQIrNR6ZjifQmdGc/2jjZ/25kSb364uEA==
+"@vue-macros/common@~1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@vue-macros/common/-/common-1.4.0.tgz#9b3cde2d868b1037f17769edd33ddf3b01aeb419"
+  integrity sha512-Wnpk6OVPYw7ZrrShOS7RZL5AINFbuQWfkNCVWVESSPY+8id75YOKGzMs4X5YcNayywdSGEvV7ntVJ2RQ+ez21A==
   dependencies:
-    "@babel/types" "^7.21.5"
+    "@babel/types" "^7.22.4"
     "@rollup/pluginutils" "^5.0.2"
     "@vue/compiler-sfc" "^3.3.4"
+    ast-kit "^0.6.2"
     local-pkg "^0.4.3"
     magic-string-ast "^0.1.2"
 
@@ -815,6 +840,15 @@ array-tree-filter@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/array-tree-filter/-/array-tree-filter-2.1.0.tgz#873ac00fec83749f255ac8dd083814b4f6329190"
   integrity sha512-4ROwICNlNw/Hqa9v+rk5h22KjmzB1JGTMVKP2AKJBOCgb0yL0ASf0+YvCcLNNwquOHNX48jkeZIJ3a+oOQqKcw==
+
+ast-kit@^0.6.2:
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/ast-kit/-/ast-kit-0.6.5.tgz#06157fcd2e3573a954dc3fd05f3ab32df12d6c66"
+  integrity sha512-XCg0VWvmWU2T/6aMp8VRfJWZ6LZv1P0o8otWY7RAGtfKj0qGi45vtnKNkltJhu9tmbQNZxv+gJA4o7FtLDfmWg==
+  dependencies:
+    "@babel/parser" "^7.22.4"
+    "@rollup/pluginutils" "^5.0.2"
+    pathe "^1.1.0"
 
 ast-walker-scope@^0.4.1:
   version "0.4.1"
@@ -1845,12 +1879,12 @@ unplugin-vue-components@^0.24.0:
     resolve "^1.22.1"
     unplugin "^1.1.0"
 
-unplugin-vue-define-options@^1.3.3:
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/unplugin-vue-define-options/-/unplugin-vue-define-options-1.3.7.tgz#d3aae9a131be9e7fdcd1597e4e67b50b596bc18b"
-  integrity sha512-DIZtzJ5bJOVSPH4D8uNSJdCFE5vQwUSVUoSFqJjIJqMZ+X1bp5ydMdmB4vlAOnKhdCQszvU+mP+Fu0A64tnvcw==
+unplugin-vue-define-options@^1.3.8:
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/unplugin-vue-define-options/-/unplugin-vue-define-options-1.3.8.tgz#fb8528afd42b304405b3e21e5dd6b310dc9dd564"
+  integrity sha512-1GOjzRJn1uinTZXsw4harGwS2op5dIjVfmMIeCbkt7tjipaBLt/8M4vWli4IflJ82bXorMJQ6P5HDF08C+aHhg==
   dependencies:
-    "@vue-macros/common" "~1.3.3"
+    "@vue-macros/common" "~1.4.0"
     ast-walker-scope "^0.4.1"
     unplugin "^1.3.1"
 
