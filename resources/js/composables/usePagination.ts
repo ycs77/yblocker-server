@@ -1,12 +1,11 @@
 import axios from 'axios'
+import { ref, type Ref } from 'vue'
+import { usePage } from '@inertiajs/vue3'
 import type { Paginator } from '@/types/pagination'
 
-export function usePagination<T>(
-  key: string,
-  source: Paginator<T>
-) {
-  const collection = ref(source.data)
-
+export function usePagination<T>(key: string) {
+  const source = usePage().props[key] as Paginator<T>
+  const collection = ref(source.data) as Ref<T[]>
   const paginationMeta = ref({
     current_page: source.current_page,
     per_page: source.per_page,
@@ -38,12 +37,13 @@ export function usePagination<T>(
     }).then(({ data: { props } }) => {
       loading.value = false
 
-      collection.value = props[key].data
+      const source = props[key] as Paginator<T>
+      collection.value = source.data
       paginationMeta.value = {
-        current_page: props[key].current_page,
-        per_page: props[key].per_page,
-        total: props[key].total,
-        first_page_url: props[key].first_page_url,
+        current_page: source.current_page,
+        per_page: source.per_page,
+        total: source.total,
+        first_page_url: source.first_page_url,
       }
     })
   }

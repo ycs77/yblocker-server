@@ -149,6 +149,14 @@ import { message } from 'ant-design-vue/es'
 import type { LabeledValue } from 'ant-design-vue/es/select'
 import type { Paginator } from '@/types/pagination'
 
+interface History {
+  id: number
+  url: string
+  hostname: string
+  title: string
+  created_at: string
+}
+
 const props = defineProps<{
   user: {
     id: number
@@ -160,13 +168,7 @@ const props = defineProps<{
     labels: string[]
     data: number[]
   }
-  histories: Paginator<{
-    id: number
-    url: string
-    hostname: string
-    title: string
-    created_at: string
-  }>
+  histories: Paginator<History>
   historyFilters: {
     url: string | null
     hostname: string[] | null
@@ -252,7 +254,7 @@ const {
   pagination: historiesPagination,
   loading: historiesLoading,
   handleTableChange: handleHistoriesTableChange,
-} = usePagination('histories', props.histories)
+} = usePagination<History>('histories')
 
 const historiesColumns = [
   { title: '網域', dataIndex: 'hostname', key: 'hostname' },
