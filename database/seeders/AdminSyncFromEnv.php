@@ -17,11 +17,11 @@ class AdminSyncFromEnv extends Seeder
         $username = env('ADMIN_USERNAME');
         $password = env('ADMIN_PASSWORD');
 
-        if (!$username) {
+        if (! $username) {
             throw new Error('Missing ADMIN_USERNAME from .env file');
         }
 
-        if (!$password) {
+        if (! $password) {
             throw new Error('Missing ADMIN_PASSWORD from .env file');
         }
 
